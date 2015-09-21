@@ -1,0 +1,9 @@
+gunicorn
+Flask==0.10.1
+Flask-Script
+Flask-SQLAlchemy
+SQLAlchemy==1.0
+ipython
+Jinja2
+requests
+

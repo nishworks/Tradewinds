@@ -74,9 +74,20 @@ def routes():
         methods = ','.join(rule.methods)
         line = urllib.unquote("{:50s} {:20s} {}".format(rule.endpoint, methods, rule))
         output.append(line)
-
     for line in sorted(output):
         print(line)
+
+
+@manager.command
+def config():
+    """
+        Lists config defined in application
+    """
+    keys = sorted(app.config.keys())
+    print '\n----------------- Config -------------------\n'
+    for key in keys:
+        print "{0:40s} {1}".format(key, app.config[key])
+    print '\n'
 
 
 @manager.command

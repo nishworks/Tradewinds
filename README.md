@@ -46,15 +46,15 @@ Setup Guide:
 
 Development Guide:
 
-   * Manage.py CLI
-       * Provides you with following commands:
-         * runserver -  To run the development server with config defined in config.py
-         * gunicorn -  To run multiple instances of the server for scalability
-         * dirs - To list important directories configured in main app
-         * config - To print out app config
-         * routes - To list routes configured in an app
-   * Directories
-       * All web application projects tend to have at least the following directories:
-         * templates - To keep html templates
-         * static - This directory has subdirectories - js, img and css to keep static content.
-         * uploads - Temporary place to hold uploads from user
+    * Manage.py CLI
+        * Provides you with following commands:
+            * runserver -  To run the development server with config defined in config.py
+            * gunicorn -  To run multiple instances of the server for scalability
+            * dirs - To list important directories configured in main app
+            * config - To print out app config
+            * routes - To list routes configured in an app
+    * Directories
+        * All web application projects tend to have at least the following directories:
+            * templates - To keep html templates
+            * static - This directory has subdirectories - js, img and css to keep static content.
+            * uploads - Temporary place to hold uploads from user

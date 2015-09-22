@@ -25,7 +25,6 @@ __doc__ = """
 
 """
 
-
 manager = Manager(app)
 
 

@@ -6,4 +6,4 @@ SQLAlchemy==1.0
 ipython
 Jinja2
 requests
-
+sphinx

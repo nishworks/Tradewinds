@@ -1,5 +1,5 @@
 ############
-All about me
+Finance
 ############
 
 I'm Nishant Garg, a Django user and developer.

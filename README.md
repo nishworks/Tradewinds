@@ -2,6 +2,8 @@
 
 This is a an ambitious web app which aims to serve all the use cases in a grain market.
 
+*Documentation*: http://mandi.readthedocs.org/en/latest/
+
 ## Setup Guide:
   * You should have these installed:  **python 2.7** and **pip**
   * **Tox Installation** (try with sudo if there is a permission error):
@@ -33,6 +35,13 @@ This is a an ambitious web app which aims to serve all the use cases in a grain 
        * ipython (Nice alternative to official python shell)
        * Jinja2  (Templating engine)
        * requests ( HTTP library)
+       * sphinx (Documentation tool)
+       * sphinx_rtd_theme (Theme for sphinx)
+
+
+## Documentation
+  * Documentation is rebuilt on readthedocs.org whenever a commit is pushed to this repository.
+
 
 ## Development Guide:
 

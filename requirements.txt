@@ -7,3 +7,4 @@ ipython
 Jinja2
 requests
 sphinx
+sphinx_rtd_theme

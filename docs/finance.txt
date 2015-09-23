@@ -12,8 +12,8 @@ Finance
 
 * Transaction: Transaction means the exchange of money or moneys worth from one account to another
   account Events like purchase and sale of goods, receipt and payment of cash for services or on paid,
-  for something given or received respectively, but gives rise to debtor and personal accounts, loss or
-  profit in dealings etc., are the transactions.
+  for something given or received respectively, but gives rise to debtor and personal accounts, loss
+  or profit in dealings etc., are the transactions.
 
 * Proprietor: The person who makes the investment and bears all the risks connected with the business.
 
@@ -32,7 +32,8 @@ Finance
   In simple terms, debts repayable to outsiders by the business are known as liabilities.
 
 * Asset: Any physical thing or right owned that has a money value is an asset. In other words, an 
-  asset is that expenditure which results in acquiring of some property or benefits of a lasting nature
+  asset is that expenditure which results in acquiring of some property or benefits of a lasting
+  nature.
 
 * Goods: Only those articles which are bought for resale for profit are known as Goods.
 
@@ -50,9 +51,10 @@ Finance
 
 * Income: It is different from revenue. Amount received from saleof goods is called revenue and cost
   of goods sold is called expense. Surplus of revenue over expense is called income. For example:
-  If goods costing Rs. 4,00,000 are sold for Rs. 5,00,000, the sale amounting to Rs 5,00,000 is revenue, cost amounting to Rs 4,00,000 is expensevnad the difference between the two i.e. 
+  If goods costing Rs. 4,00,000 are sold for Rs. 5,00,000, the sale amounting to Rs 5,00,000 is
+  revenue, cost amounting to Rs 4,00,000 is expensevnad the difference between the two i.e. 
   Rs 1,00,000 is income.
-  						Income = Revenue- Expense
+  						          Income = Revenue- Expense
 
 * Profit: It is the excess of total revenues over total expenses of a business enterprise for an
   accounting period.

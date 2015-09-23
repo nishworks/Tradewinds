@@ -10,16 +10,24 @@ This is a an ambitious web app which aims to serve all the use cases in a grain 
                 ```
                 pip install tox
                 ```
-    * Once you are in the project root directory and you have tox installed, execute
+  * **Project setup**
                 ```
-                tox
+                source setup.sh
                 ```
-    * This will create a virtual environment under 'project_root/.tox' directory and will install all the python packages in it specified by requirement.txt.
-  * **Activate virtual environment** - In the project root, execute
-                ```
-                source activate
-                ```
-  * **Starting the server** -
+    * Following commands will be available after setup:
+
+
+    | Command    | Description                            |
+    |------------|----------------------------------------|
+    | run        | Executes python manage.py runserver -r |
+    | doc        | Opens documentation in a browser       |
+    | mandi      | cd into this directory from anywhere   |
+    | activate   | Activates the virtual environment      |
+    | deactivate | Deactivates the virtual environment    |                   
+
+      Above commands can be run from any directory
+
+  * **Starting the server**
                 ```
                 python manage.py runserver
                 ```

@@ -1,0 +1,28 @@
+############
+Usecase
+############
+
+## Unregistered User:
+
+* Register by creating username,password and adding phone number and email id.
+
+## Registered User:
+
+* Login using correct login details
+
+## Logged in User:
+
+* Update his personal info.
+* Add a new Firm.
+* Select a Firm from list of firms.
+* Logout
+
+## Firm User:
+
+* Add new Account Types.
+* Add new Accounts.
+* Add new transaction entry by selecting two accounts, one for debit and other for 
+  credit,date,narration and the amount.  
+* Select Journal to see all the transaction.
+* Select the Ledger and then select that particular account to see transactions of a particular
+  account   

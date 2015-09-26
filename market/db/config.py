@@ -1,11 +1,15 @@
-CONNECTION_STRING = 'mysql+pymysql://admin:admin@localhost:8889/mandi'
+mysql_config = {
+    'dialect': 'mysql',
+    'driver': 'pymysql',
+    'username': 'admin',
+    'password': 'admin',
+    'host': 'localhost',
+    'port': '8889',
+    'database': 'mandi',
+}
 
-supported_result_types = [
-    {'id': 1, 'value': 'pass', },
-    {'id': 2, 'value': 'fail', },
-    {'id': 3, 'value': 'in-progress'}
-]
+CONNECTION_STRING = '%(dialect)s+%(driver)s://%(username)s:%(password)s@%(host)s:%(port)s/%(database)s' % mysql_config
 
 sample_user_data = [
-    {'id': 1, 'username': 'ankur', 'name': 'ankur', 'password': 'ankur', 'phone_num': '3652314', 'email': 'ankur@gmail.com' }
+    {'id': 1, 'username': 'ankur', 'name': 'ankur', 'password': 'ankur', 'phone_num': '3652314', 'email': 'ankur@gmail.com' },
 ]

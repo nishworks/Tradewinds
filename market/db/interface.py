@@ -9,9 +9,9 @@ from sqlalchemy import orm
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Create log directory if not exists
-LOG_DIR='../../logs/sqlalchemy'
+LOG_DIR = os.path.join(current_dir, '../../logs/sqlalchemy')
 if not os.path.exists(LOG_DIR):
-        os.makedirs(LOG_DIR)
+    os.makedirs(LOG_DIR)
 
 # create formatter and add it to the handlers
 _formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s',
@@ -21,7 +21,7 @@ _formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s',
 _sqlalchemy = logging.getLogger('sqlalchemy')
 _sqlalchemy.setLevel(logging.DEBUG)
 
-_sql_h_fh = logging.handlers.RotatingFileHandler(os.path.join(current_dir, LOG_DIR, 'engine.log'), maxBytes=500000, backupCount=5)
+_sql_h_fh = logging.handlers.RotatingFileHandler(os.path.join(LOG_DIR, 'engine.log'), maxBytes=500000, backupCount=5)
 _sql_h_fh.setLevel(logging.DEBUG)
 _sql_h_fh.setFormatter(_formatter)
 
@@ -86,7 +86,6 @@ class DbInterface:
         """
             This method will create all the tables that are bound to 'BASE'
             in schema.py
-
         """
         self.Base.metadata.bind = self.engine
         if delete_existing:
@@ -119,6 +118,7 @@ class DbInterface:
             print 'Populating table %s...' % table.__name__
             self.connection.execute(table.__table__.insert(), table_data)
             tx.commit()
+            print 'Successfully populated'
         except:
             tx.rollback()
             raise

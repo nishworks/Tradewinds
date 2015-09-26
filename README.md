@@ -45,6 +45,7 @@ This is a an ambitious web app which aims to serve all the use cases in a grain 
        * requests ( HTTP library)
        * sphinx (Documentation tool)
        * sphinx_rtd_theme (Theme for sphinx)
+       * PyMySQL (For MySql Connection)
 
 
 ## Documentation

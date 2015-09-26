@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request
 from flask import session, url_for, redirect
+from datastore import DataStore
 app = Flask(__name__)
 
 __doc__ = """
@@ -29,7 +30,19 @@ def another_template_example():
 
 @app.route('/')
 def hello_world():
-    return 'Hello World! <br /> <a href="/login"> Login </a>'
+    return 'Hello World! <br /> <a href="/login"> Login </a><a href="/registerform"> Register </a>'
+
+@app.route('/registerform')
+def register_form():
+    return render_template('register.html')
+
+@app.route('/register', methods=['POST'])
+def register():		
+	ds = DataStore()
+	added, msg = ds.addUser(request.form)
+	if added:
+		return render_template('login.html', resp=msg)
+	return render_template('register.html', resp=msg)	
 
 @app.route('/login')
 def login_form():
@@ -43,12 +56,14 @@ def home():
 
 @app.route('/authenticate', methods=['POST'])
 def login():
-	if request.form['username'] == 'nik' and request.form['password'] == 'nikh':
-		print request.form['username']
+	ds = DataStore()
+	validation, msg, userid = ds.authenticate(request.form)
+	if validation:
 		session['username'] = request.form['username']
+		session['userid'] = userid 
 		return redirect(url_for('home'))
 	else:
-		return render_template('login.html', resp="Wrong username and password,try again!")    		
+		return render_template('login.html', resp=msg)    		
 
 @app.route('/logout')
 def logout():

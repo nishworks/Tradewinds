@@ -4,8 +4,8 @@
     <h1>Login</h1>
     {{ resp }}
     <form action="/authenticate" method="POST">
-        Username: <input type="text" name="username" value="">
-        Password<input type="text" name="password" value="">
+        Username: <input type="text" name="username" value="" required>
+        Password<input type="text" name="password" value="" required>
         <input type="submit" value="Submit">
     </form>
 </body>

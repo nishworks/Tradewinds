@@ -8,7 +8,9 @@ db_interface = DbInterface(CONNECTION_STRING, Base)
 
 def setup_and_populate_tables():
     db_interface.setup_tables(delete_existing=True)
-    db_interface.populate_tables(ResultType, supported_result_types)
+    db_interface.populate_tables(User, sample_user_data )
 
 # For setting up one table
 # db_interface.setup_table(PublishedArtifact, delete_existing=True)
+
+    

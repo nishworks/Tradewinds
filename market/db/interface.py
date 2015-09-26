@@ -9,7 +9,7 @@ from sqlalchemy import orm
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Create log directory if not exists
-LOG_DIR='logs/sqlalchemy'
+LOG_DIR='../../logs/sqlalchemy'
 if not os.path.exists(LOG_DIR):
         os.makedirs(LOG_DIR)
 
@@ -88,16 +88,16 @@ class DbInterface:
             in schema.py
 
         """
-        Base.metadata.bind = self.engine
+        self.Base.metadata.bind = self.engine
         if delete_existing:
             print 'Deleting existing tables...'
-            Base.metadata.drop_all()
+            self.Base.metadata.drop_all()
         print 'Creating tables...'
-        Base.metadata.create_all(checkfirst=True, )
+        self.Base.metadata.create_all(checkfirst=True, )
         print "Table creation done."
 
     def setup_table(self, table, delete_existing=False):
-        Base.metadata.bind = self.engine
+        self.Base.metadata.bind = self.engine
         if delete_existing:
             print 'Deleting existing table...'
             self.engine.execute(DropTable(table.__table__))

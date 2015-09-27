@@ -1,11 +1,7 @@
 gunicorn
-Flask==0.10.1
-Flask-Script
-Flask-SQLAlchemy
-SQLAlchemy==1.0
+Django==1.8.4
 ipython
 Jinja2
 requests
 sphinx
 sphinx_rtd_theme
-PyMySQL

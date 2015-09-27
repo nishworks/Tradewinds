@@ -49,9 +49,9 @@ source_suffix = ['.txt']
 master_doc = 'index'
 
 # General information about the project.
-project = u'mandi'
-copyright = u'2015, Nishant Garg, Nikhil Garg'
-author = u'Nishant Garg, Nikhil Garg'
+project = u'Django-Starter'
+copyright = u'2015, Nishant Garg'
+author = u'Nishant Garg'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

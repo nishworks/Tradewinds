@@ -1,18 +1,16 @@
-.. mandi documentation master file, created by
+.. Django-Starter documentation master file, created by
    sphinx-quickstart on Tue Sep 22 18:52:29 2015.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to mandi's documentation!
-=================================
+Welcome to Django-Stater's documentation!
+========================================
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
-   finance
-   use_case
 
 
 

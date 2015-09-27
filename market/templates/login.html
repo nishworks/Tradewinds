@@ -11,8 +11,8 @@
 {% block col_one %}
 {{ super() }}
 {{ resp }}
-<form method="POST">
-    Username: <input type="text" name="username" value="" required><br />
+<form action="/login" method="POST">
+    Username<input type="text" name="username" value="" required><br />
     Password<input type="text" name="password" value="" required><br />
     <input type="submit" value="Submit">
 </form>

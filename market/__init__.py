@@ -29,7 +29,7 @@ def index():
 @app.route('/home')
 def home():
     if 'username' in session:
-        return render_template('home.html', user=session['username'])
+        return render_template('home.html', resp=str("Welcome " + session['username']))
     return render_template('login.html', resp="You are not logged in")
 
 
@@ -70,11 +70,22 @@ def login():
     return redirect(url_for('home'))
 
 
+@app.route('/addfirm', methods=['GET', 'POST'])
+def add_firm():
+    if 'username' not in session:
+        return render_template('login.html', resp="You are not logged in")
+    if not request.method == 'POST':
+        return render_template('add_firm.html')
+    name = request.form.get('name')
+    if name is None:
+        return render_template('add_firm.html', resp="name is invalid")
+    authUser = AuthUser(session['username'])
+    msg = authUser.addFirm(request.form)
+    return render_template('home.html', resp=msg)
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    # Something is wrong here, figure it out
-    # After logout, if you try to login without page refresh, you get method not allowed error
     return render_template('login.html', resp="Logout successful!")
 
 

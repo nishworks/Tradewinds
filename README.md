@@ -48,8 +48,15 @@ This is a an ambitious web app which aims to serve all the use cases in a small 
 
 ## Development Guide:
 
-   * **Directories**
-       * All web application projects tend to have at least the following directories:
-           * templates - To keep html templates
-           * static - This directory has subdirectories - js, img and css to keep static content.
-           * uploads - Temporary place to hold uploads from user
+  * **Database**
+    * We will be using sqlite for now. Plan is to migrate to PostgreSql when our datamodel design becomes stable.
+
+  * **Routes**
+    * /admin - This is the admin panel to manage this application's technicalities and view what data we store.
+                This can be accesses at http://localhost:port/admin. Credentials are admin/password.
+
+  * **Directories**
+      * All web application projects tend to have at least the following directories:
+          * templates - To keep html templates
+          * static - This directory has subdirectories - js, img and css to keep static content.
+          * uploads - Temporary place to hold uploads from user

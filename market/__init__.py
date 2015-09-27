@@ -1,8 +1,11 @@
 # -*-coding:utf8-*-
+import logging
+from logging import StreamHandler
 
 from flask import Flask, render_template, request
 from flask import session, url_for, redirect
-from datastore import DataStore
+from auth import AuthUser
+
 app = Flask(__name__)
 
 __doc__ = """
@@ -14,62 +17,66 @@ __doc__ = """
 """
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
-@app.route('/simple')
-def template_example():
-    return render_template('simple_template.html', my_string="Wheeeee!", my_list=[0, 1, 2, 3, 4, 5])
-
-@app.route('/candidate')
-def candidate_one():
-    return render_template('index.html')
-
-
-@app.route('/nicer')
-def another_template_example():
-    return render_template('nicer.html')
-
+# Setup logging to see error messages on terminal
+app.logger.setLevel(logging.DEBUG)
+app.logger.addHandler(StreamHandler())
 
 @app.route('/')
-def hello_world():
-    return 'Hello World! <br /> <a href="/login"> Login </a><a href="/registerform"> Register </a>'
+def index():
+    return redirect(url_for('login'))
 
-@app.route('/registerform')
-def register_form():
-    return render_template('register.html')
-
-@app.route('/register', methods=['POST'])
-def register():		
-	ds = DataStore()
-	added, msg = ds.addUser(request.form)
-	if added:
-		return render_template('login.html', resp=msg)
-	return render_template('register.html', resp=msg)	
-
-@app.route('/login')
-def login_form():
-    return render_template('login.html')
 
 @app.route('/home')
 def home():
-	if 'username' in session:
-		return render_template('home.html', user=session['username'])
-	return render_template('login.html', resp="You are not logged in")    
+    if 'username' in session:
+        return render_template('home.html', user=session['username'])
+    return render_template('login.html', resp="You are not logged in")
 
-@app.route('/authenticate', methods=['POST'])
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if 'username' in session:
+        return redirect(url_for('home'))
+    if not request.method == 'POST':
+        return render_template('register.html')
+    username = request.form.get('username')
+    if username is None:
+        return render_template('register.html', resp="Username is invalid")
+    authUser = AuthUser(username)
+    if authUser.exists:
+        return render_template('register.html', resp='User already exists')
+    if authUser.addUser(request.form):
+        return render_template('register.html', resp='Registration successful')
+    return render_template('register.html', resp='Internal Error')
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-	ds = DataStore()
-	validation, msg, userid = ds.authenticate(request.form)
-	if validation:
-		session['username'] = request.form['username']
-		session['userid'] = userid 
-		return redirect(url_for('home'))
-	else:
-		return render_template('login.html', resp=msg)    		
+    if not request.method == 'POST':
+        return render_template('login.html')
+    if 'username' in session:
+        return redirect(url_for('home'))
+    username = request.form.get('username')
+    if username is None:
+        return render_template('login.html', resp="Username is Invalid")
+    authUser = AuthUser(username)
+    if not authUser.exists:
+        return render_template('login.html', resp="Username is not registered")
+    instance_id = authUser.authenticate(request.form.get('password'))
+    if instance_id is None:
+        return render_template('login.html', resp='Invalid password')
+    session['username'] = request.form['username']
+    session['userid'] = instance_id
+    return redirect(url_for('home'))
+
 
 @app.route('/logout')
 def logout():
-	session.pop('username', None)
-	return render_template('login.html', resp="Logout successful!")
- 
+    session.pop('username', None)
+    # Something is wrong here, figure it out
+    # After logout, if you try to login without page refresh, you get method not allowed error
+    return render_template('login.html', resp="Logout successful!")
+
 
 if __name__ == '__main__':
     app.run()

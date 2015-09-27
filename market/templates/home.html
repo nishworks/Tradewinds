@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
+{% extends "base_layout.html" %}
+{% set title="Login" %}
+
+
+{% block header %}
     <h2>Welcome {{ user }}</h2>
-    <a href="/logout"> Logout </a>
-</body>
-</html>
+    <p><a class="btn btn-primary btn-lg" href="/logout" role="button">Logout</a></p>
+{% endblock %}
+
+
+{% block col_one %}
+{{ super() }}
+<p> Enjoy </p>
+{% endblock %}

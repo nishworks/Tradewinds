@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mandi - 0.0.1</title>
+    <title>{{ title }}</title>
     <!-- <Stylesheets>-->
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <!-- </Stylesheets> -->
     <!-- <javascript>-->
-    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/jquery.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <!-- </javascript>-->
 </head>
@@ -16,9 +16,9 @@
 <!-- Created with code snippet from http://getbootstrap.com/components/#jumbotron -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Hello, world!</h1>
-        <p> Nothing much</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+            {% block header %}
+
+            {% endblock %}
     </div>
 </div>
 
@@ -27,10 +27,21 @@
 <!-- Learn more about grids here: http://www.w3schools.com/bootstrap/bootstrap_grid_system.asp -->
 <div class="container">
     <div class="row">
-        <div class="col-md-3"> Test Column 1</div>
-        <div class="col-md-3"> Test Column 2</div>
-        <div class="col-md-3"> Test Column 3</div>
-        <div class="col-md-3"> Test Column 4</div>
+        <div class="col-md-4"> 
+            {% block col_one %}
+
+            {% endblock %}
+        </div>
+        <div class="col-md-4"> 
+            {% block col_two %}
+
+            {% endblock %}
+        </div>
+        <div class="col-md-4"> 
+            {% block col_three %}
+
+            {% endblock %}
+        </div>
     </div>
 </div>
 </body>

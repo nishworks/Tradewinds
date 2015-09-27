@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
+{% extends "base_layout.html" %}
+{% set title="Login" %}
+
+
+{% block header %}
     <h1>Login</h1>
-    {{ resp }}
-    <form action="/authenticate" method="POST">
-        Username: <input type="text" name="username" value="" required>
-        Password<input type="text" name="password" value="" required>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+    <p><a class="btn btn-primary btn-lg" href="/register" role="button">Register</a></p>
+{% endblock %}
+
+
+{% block col_one %}
+{{ super() }}
+{{ resp }}
+<form method="POST">
+    Username: <input type="text" name="username" value="" required><br />
+    Password<input type="text" name="password" value="" required><br />
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+

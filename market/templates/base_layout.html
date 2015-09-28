@@ -21,15 +21,18 @@
             {% endblock %}
     </div>
 </div>
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      {{ message }}
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
     {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
 
 <!-- Used http://shoelace.io/ to generate following code easily -->
 <!-- CodeSchool has really good tutorial on bootstrap -->

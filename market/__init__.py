@@ -3,8 +3,9 @@ import logging
 from logging import StreamHandler
 
 from flask import Flask, render_template, request
-from flask import session, url_for, redirect
+from flask import session, url_for, redirect, flash
 from auth import AuthUser
+from firm import Firms
 
 app = Flask(__name__)
 
@@ -29,9 +30,8 @@ def index():
 @app.route('/home')
 def home():
     if 'username' in session:
-        return render_template('home.html', resp=str("Welcome " + session['username']))
-    return render_template('login.html', resp="You are not logged in")
-
+        return render_template('home.html')
+    return response('You are not logged in','login')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -40,53 +40,57 @@ def register():
     if not request.method == 'POST':
         return render_template('register.html')
     username = request.form.get('username')
-    if username is None:
-        return render_template('register.html', resp="Username is invalid")
+    if username == None:
+        return response('Username is Invalid','register')
     authUser = AuthUser(username)
     if authUser.exists:
-        return render_template('register.html', resp='User already exists')
+        return response('User already exists','register')
     if authUser.addUser(request.form):
-        return render_template('register.html', resp='Registration successful')
-    return render_template('register.html', resp='Internal Error')
+        return response('Registration successful','login')
+    return response('Internal Error','register')
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if not request.method == 'POST':
-        return render_template('login.html')
     if 'username' in session:
         return redirect(url_for('home'))
+    if not request.method == 'POST':
+        return render_template('login.html')
     username = request.form.get('username')
     if username is None:
-        return render_template('login.html', resp="Username is Invalid")
+        return response('Username is Invalid','login')
     authUser = AuthUser(username)
     if not authUser.exists:
-        return render_template('login.html', resp="Username is not registered")
+        return response('Username is not registered','login')
     instance_id = authUser.authenticate(request.form.get('password'))
     if instance_id is None:
-        return render_template('login.html', resp='Invalid password')
+        return response('Invalid password','login')
     session['username'] = request.form['username']
     session['userid'] = instance_id
-    return redirect(url_for('home'))
+    return response(str("Welcome " + session['username']),'home')
 
 
 @app.route('/addfirm', methods=['GET', 'POST'])
 def add_firm():
     if 'username' not in session:
-        return render_template('login.html', resp="You are not logged in")
+        return response('You are not logged in','login')
     if not request.method == 'POST':
         return render_template('add_firm.html')
     name = request.form.get('name')
     if name is None:
-        return render_template('add_firm.html', resp="name is invalid")
-    authUser = AuthUser(session['username'])
-    msg = authUser.addFirm(request.form)
-    return render_template('home.html', resp=msg)
+        return response('Name is invalid','add_firm')
+    msg = Firms(session['userid'],name).addFirm(request.form)
+    return response(msg,'home')
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return render_template('login.html', resp="Logout successful!")
+    return response('Logout successful','login')
+
+def response(msg, url):
+    flash(msg)
+    return redirect(url_for(url))
+
 
 
 if __name__ == '__main__':

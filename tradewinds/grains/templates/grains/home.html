@@ -1,0 +1,19 @@
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'grains:addFirm' %}" method="post">
+{% csrf_token %}
+    <input type="text" name="firm" id="firm" value="" />
+	<input type="submit" value="Add Firm" />
+</form>
+
+<h2>Firms</h2>
+{% if firm_list %}
+    <ul>
+    {% for firm in firm_list %}
+        <li><a href="#">{{ firm.name }} , {{firm.owner}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

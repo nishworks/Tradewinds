@@ -1,8 +1,9 @@
 from django.conf.urls import url
 
-from . import views
+from views import form_example, addFirm, index
 
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^/addFirm/$', views.addFirm, name='addFirm'),
-]    
+    url(r'^$', index, name='index'),
+    url(r'^addFirm$', addFirm, name='addFirm'),
+    url(r'^settings$', form_example, name='layout'),
+]

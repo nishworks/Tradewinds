@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+import views
 
 urlpatterns = [
+    url(r'^$', views.index, name='main_index'),
+    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout',  {'next_page': '/login/'}),
+
     url(r'^grains/', include('grains.urls', namespace="grains")),
     url(r'^admin/', include(admin.site.urls)),
 ]

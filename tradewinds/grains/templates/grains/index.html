@@ -1,0 +1,22 @@
+{% extends "grains/layout.html" %}
+
+{% block content %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'grains:addFirm' %}" method="post">
+{% csrf_token %}
+    <input type="text" name="firm" id="firm" value="" />
+	<input type="submit" value="Add Firm" />
+</form>
+
+<h2 class="text text-primary">My Firms</h2>
+{% if firms %}
+    <ul class="list-group">
+    {% for firm in firms %}
+        <li class="list-group-item"><a href="#">{{ firm.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No firms are registered.</p>
+{% endif %}
+{% endblock %}

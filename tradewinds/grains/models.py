@@ -21,6 +21,10 @@ class Person(models.Model):
     phoneNum = models.CharField(max_length=15)
     website = models.URLField()
     email = models.EmailField()
+    userId = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return str(self.firsName + " " + self.lastName) 
 
 
 class Company(models.Model):
@@ -30,18 +34,28 @@ class Company(models.Model):
     phoneNum = models.CharField(max_length=15)
     website = models.URLField()
     email = models.EmailField()
+    userId = models.ForeignKey(User)
 
+    def __unicode__(self):
+        return self.name
+        
 
 class Firm(models.Model):
 
     name = models.CharField(max_length=150)
     owner = models.ForeignKey(User)
 
+    def __unicode__(self):
+        return self.name
+
 
 class AccountType(models.Model):
 
-    firmId = models.ForeignKey(Firm)
+    userId = models.ForeignKey(User)
     name = models.CharField(max_length=15)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Account(models.Model):
@@ -49,14 +63,20 @@ class Account(models.Model):
     firmId = models.ForeignKey(Firm)
     accountType = models.ForeignKey(AccountType)
     accountNumber = models.CharField(max_length=15)
-    owner = models.ForeignKey(Person, null=True)
-    owner = models.ForeignKey(Company, null=True)
+    person = models.ForeignKey(Person, null=True)
+    company = models.ForeignKey(Company, null=True)
+
+    def __unicode__(self):
+        return self.accountNumber
 
 
 class TransactionType(models.Model):
 
     name = models.CharField(max_length=15)
     description = models.CharField(max_length=150)
+    
+    def __unicode__(self):
+        return self.name
 
 
 class Transaction(models.Model):

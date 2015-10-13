@@ -5,18 +5,22 @@
 
 <form action="{% url 'grains:addFirm' %}" method="post">
 {% csrf_token %}
-    <input type="text" name="firm" id="firm" value="" />
-	<input type="submit" value="Add Firm" />
+    <div class="form-group">
+	    <label for="firm">Firm</label>
+	    <input type="text" class="form-control" name="firm" id="firm" placeholder="Enter Firm name" required/>
+	</div>
+	<button type="submit" class="btn btn-default">Add Firm</button>
 </form>
 
 <h2 class="text text-primary">My Firms</h2>
 {% if firms %}
     <ul class="list-group">
     {% for firm in firms %}
-        <li class="list-group-item"><a href="#">{{ firm.name }}</a></li>
+        <li class="list-group-item"><a href="{% url 'grains:viewFirm' firm.id %}">{{ firm.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No firms are registered.</p>
 {% endif %}
 {% endblock %}
+

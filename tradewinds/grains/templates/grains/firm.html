@@ -1,0 +1,123 @@
+{% extends "grains/layout.html" %}
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+  <ul class='nav nav-tabs'>
+    <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Accounts
+    <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="#person">Person</a></li>
+      <li><a href="#company">Company</a></li>
+    </ul>
+  </li>
+    <li class="active"><a href='#transaction'>Transactions</a></li>
+  </ul>
+
+    <div class='tab-content'>
+	    <div class='tab-pane fade' id='person'>
+	        </br>
+	    	</br>
+	    	{% if types %}
+		    	<form action="{% url 'grains:addAccount' firm_id %}" method="post"> 
+		    		{% csrf_token %}             
+				    <div class="form-group">
+				        <label for="accountnum">Enter Account number</label>
+				        <input type="text" class="form-control" name="accountnum" id="accountnum" placeholder="Enter Account num" required>
+				    </div>
+				    <div class="form-group">
+				  		<label for="person">Person:</label>
+				  		<select class="form-control" name="person" id="person" required>
+				    		{% for person in persons %}
+								<option value="{{ person.id }}" SELECTED>{{ person.firsName }} {{ person.lastName }}</option>
+							{% endfor %}
+				  		</select>
+				  	</div>
+				  	<div class="form-group">
+				  	<label for="accounttype">Account Type:</label>	
+				  		<select class="form-control" name="accounttype" id="accounttype" required>
+				    		{% for type in types %}
+								<option value="{{ type.id }}" SELECTED>{{ type.name }}</option>
+							{% endfor %}
+				  		</select>
+					</div>
+					<input type="hidden" name="company" value="">
+				    <button type="submit" class="btn btn-default">Add Account</button>
+				</form>
+			    {% else %}
+			    	<p>No Account Types added. First add some Account Types.</p>
+			    {% endif %}
+			    </br>
+		        <h2 class="text text-primary">My Accounts</h2>
+		        {% if accounts %}
+	    			<ul class="list-group">
+	    			{% for account in accounts %}
+	        			<li class="list-group-item">{{ account.person.firsName}} {{ account.person.lastName}} {{ account.company.name}} </li>
+	    			{% endfor %}
+	    			</ul>
+				{% else %}
+					<p>No Accounts added.</p>
+				{% endif %}		
+	    </div>
+	    <div class='tab-pane fade' id='company'>
+	        </br>
+	    	</br>
+	    	{% if types %}
+		    	<form action="{% url 'grains:addAccount' firm_id %}" method="post"> 
+		    		{% csrf_token %}             
+				    <div class="form-group">
+				        <label for="accountnum">Enter Account number</label>
+				        <input type="text" class="form-control" name="accountnum" id="accountnum" value="" placeholder="Enter Account num" required>
+				    </div>
+				    <div class="form-group">
+				  		<label for="company">Company:</label>
+				  		<select class="form-control" name="company" id="company" required>
+				    		{% for company in companies %}
+								<option value="{{ company.id }}" SELECTED>{{ company.name }}</option>
+							{% endfor %}
+				  		</select>
+				  	</div>
+				    <div class="form-group">
+				  		<label for="accounttype">Account Type:</label>
+				  		<select class="form-control" name="accounttype" id="accounttype" required>
+				    		{% for type in types %}
+								<option value="{{ type.id }}" SELECTED>{{ type.name }}</option>
+							{% endfor %}
+				  		</select>
+					</div>
+					<input type="hidden" name="person" value="">
+				    <button type="submit" class="btn btn-default">Add Account</button>
+				</form>
+			    {% else %}
+			    	<p>No Account Types added. First add some Account Types.</p>
+			    {% endif %}
+			    </br>
+		        <h2 class="text text-primary">My Accounts</h2>
+		        {% if accounts %}
+	    			<ul class="list-group">
+	    			{% for account in accounts %}
+	        			<li class="list-group-item">{{ account.person.firsName}} {{ account.person.lastName}} {{ account.company.name}} </li>
+	    			{% endfor %}
+	    			</ul>
+				{% else %}
+					<p>No Account added.</p>
+				{% endif %}		
+	    </div>
+	    <div class='tab-pane active' id='transaction'>
+	      <p>Transactions</p>
+	    </div>
+	 </div>
+
+
+<p>{{ firm }}</p>
+    <script>
+      $(function() {
+        $('.nav-tabs a').click(function (e) {
+          e.preventDefault();
+          $(this).tab('show');
+        });
+      });
+    </script>
+{% endblock %}

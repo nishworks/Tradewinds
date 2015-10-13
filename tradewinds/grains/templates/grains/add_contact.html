@@ -1,0 +1,107 @@
+{% extends "grains/layout.html" %}
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+  <ul class='nav nav-tabs'>
+    <li class='active'><a href='#person'>Person</a></li>
+    <li><a href='#company'>Company</a></li>
+  </ul>
+
+    <div class='tab-content'>
+	    <div class='tab-pane active' id='person'>
+	        </br>
+	    	</br>
+		    	<form action="{% url 'grains:addPerson'%}" method="post"> 
+		    		{% csrf_token %}             
+					<div class="form-group">
+				        <label for="firstname">First Name</label>
+				        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter First Name" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="lastname">Last Name</label>
+				        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter Last Name" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="phonenum">Phone Number</label>
+				        <input type="text" class="form-control" name="phonenum" id="phonenum" placeholder="Enter Phone number" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="website">Website</label>
+				        <input type="url" class="form-control" name="website" id="website" placeholder="http://url.com" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="email">Email</label>
+				        <input type="email" class="form-control" name="email" id="email" placeholder="abc@xyz.com" required>
+				    </div>
+				    <button type="submit" class="btn btn-default">Add Person</button>
+				</form>
+			    </br>
+		        <h2 class="text text-primary">Added Persons</h2>
+		        {% if persons %}
+	    			<ul class="list-group">
+	    			{% for person in persons %}
+	        			<li class="list-group-item">{{ person.firsName }} {{ person.lastName }}</li>
+	    			{% endfor %}
+	    			</ul>
+				{% else %}
+					<p>No Person added.</p>
+				{% endif %}		
+	    </div>
+	    <div class='tab-pane fade' id='company'>
+	        </br>
+	    	</br>
+		    	<form action="{% url 'grains:addCompany'%}" method="post"> 
+		    		{% csrf_token %}
+		    		<div class="form-group">
+				        <label for="companyname">Company</label>
+				        <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Enter Company Name" required>
+				    </div>             
+					<div class="form-group">
+				        <label for="firstname">First Name</label>
+				        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter First Name" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="lastname">Last Name</label>
+				        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter Last Name" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="phonenum">Phone Number</label>
+				        <input type="text" class="form-control" name="phonenum" id="phonenum" placeholder="Enter Phone number" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="website">Website</label>
+				        <input type="url" class="form-control" name="website" id="website" placeholder="http://url.com" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="email">Email</label>
+				        <input type="email" class="form-control" name="email" id="email" placeholder="abc@xyz.com" required>
+				    </div>
+				    <button type="submit" class="btn btn-default">Add Company</button>
+				</form>
+			    </br>
+		        <h2 class="text text-primary">Added Companies</h2>
+		        {% if companies %}
+	    			<ul class="list-group">
+	    			{% for company in companies %}
+	        			<li class="list-group-item">{{ company.name }}</li>
+	    			{% endfor %}
+	    			</ul>
+				{% else %}
+					<p>No Company added.</p>
+				{% endif %}		
+	    </div>
+	 </div>
+
+
+<p>{{ firm }}</p>
+    <script>
+      $(function() {
+        $('.nav-tabs a').click(function (e) {
+          e.preventDefault();
+          $(this).tab('show');
+        });
+      });
+    </script>
+{% endblock %}

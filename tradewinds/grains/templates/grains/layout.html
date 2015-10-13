@@ -8,7 +8,8 @@
             <p class="lead">Welcome {{ user.first_name }}</p>
             <div class="list-group">
                 <a href="/grains" class="list-group-item active">Dashboard</a>
-                <a href="settings" class="list-group-item">Settings</a>
+                <a href="{% url 'grains:settings' %}" class="list-group-item">Settings</a>
+                <a href="{% url 'grains:contacts' %}" class="list-group-item">Contacts</a>
                 <a href="/logout/" class="list-group-item">Logout</a>
             </div>
         </div>
